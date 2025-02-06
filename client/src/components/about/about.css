@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+.about{
+  background-color: #0F0F0F;
+  padding-bottom: 30px;
+}
+.about-container{
+  padding: 20px;
+  opacity: 0;
+  margin: auto 100px;
+  transform: translateY(50px);
+  text-align: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.about-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-head h1 {
+  font-size: 2.5rem;
+  color: #ccc;
+  margin: 40px;
+}
+
+.abt-explain {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+}
+hr{
+  width: 80%;
+  margin: auto auto;
+  box-shadow: 1px 1px 5px rgba(rgb(139, 125, 125), rgb(192, 186, 186), white, 1);
+}
+
+.explain-head h1 {
+  font-size: 2rem;
+  color: #fff;
+  margin: 30px;
+}
+
+.explain-head ul {
+  list-style: none;
+  padding: 0;
+}
+
+.explain-head ul li {
+  font-size: 1.1rem;
+  margin: 30px 0;
+}
+
+.about-details h2 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 24px;
+}
+
+.about-details p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin:30px 80px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+  .about-head h1 {
+    font-size: 2rem;
+  }
+  .abt-explain h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-head h1 {
+    font-size: 1.8rem;
+  }
+  .abt-explain h1 {
+    font-size: 1.3rem;
+  }
+}

@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { AuthRoute } from "../../context/authContext";
 import toast from "react-hot-toast";
+import FeatureBox from "../../components/featureBox/featureBox";
+import About from "../../components/about/About";
 
-const Home = () => {
+const Home = ({ aboutRef }) => {
   const [isBlurred, setIsBlurred] = useState(true);
   const { checkVerified } = useContext(AuthRoute);
 
@@ -66,6 +68,9 @@ const Home = () => {
           <div className="side-img"></div>
         </div>
       </div>
+
+      <FeatureBox />
+      <About ref={aboutRef} />
     </>
   );
 };

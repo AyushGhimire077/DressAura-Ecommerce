@@ -6,6 +6,7 @@
     background-color: #0F0F0F;
     width: 150%;
     padding: 30px 0;
+    flex-grow: 1;
 }
 .hero-page{
     width: 100%;
@@ -61,13 +62,29 @@
     padding: 0;
 }
 
-.info h1 {
-    font-size: 6rem;
+.company-name h1 {
+    font-size: 36px;
     margin: 0;
     padding: 0;
     letter-spacing: 5px;
     text-transform: uppercase;
-    font-family: Arial, sans-serif
+    position: relative;
+    animation: sideEnter 0.4s ease-in-out forwards;
+    z-index: 10;
+    font-family: 'Outfit';
+    background-image: linear-gradient(to right, rgb(174, 86, 174), rgb(180 39 63));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@keyframes sideEnter{
+    from{
+        transform: translateX(-10%);
+        opacity: -1;
+    }
+    to{
+        transform: translateX(0);
+    }
 }
 
 .p-info {
@@ -108,12 +125,6 @@
     left: 10%;
 }
 
-.hero .company-name h1 {
-    font-size: 36px;
-    letter-spacing: 2px;
-    color: #fff;
-    margin: 0;
-}
 .hover-letter {
   display: inline-block;
   transition: transform 0.5s ease, color 0.5s ease;
@@ -127,5 +138,4 @@
   filter: blur(1px);
   transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-
 

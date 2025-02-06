@@ -7,14 +7,15 @@ import ForgetPass from "./pages/forgetPass/ForgetPass";
 import Verify from "./pages/verify-page/Verify";
 
 const App = () => {
+
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth-page" element={<Auth />} />
-          <Route path="/forget-password" element={<ForgetPass/>} />
-          <Route path="/verify-email" element={<Verify/>} />
+          <Route path="/forget-password" element={<ForgetPass />} />
+          <Route path="/verify-email" element={<Verify />} />
         </Routes>
       </Router>
       <Footer />
