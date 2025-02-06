@@ -1,6 +1,6 @@
 # DressAura - A Clothing E-commerce Website
 
-DressAura is a full-stack clothing e-commerce website with user authentication, product listing, and a shopping cart.
+DressAura is a full-stack clothing e-commerce website offering user authentication, product listings, and shopping cart functionality. Built with React and Node.js, this project allows users to browse clothing, add products to a cart, and proceed to checkout (planned for future).
 
 ## Installation
 
@@ -73,35 +73,29 @@ To run the project locally, follow these steps:
 Here’s an overview of the project structure:
 
 DressAura/
-├── client/ # Frontend (React)
-│ ├── public/ # Static assets
-│ └── src/
-│ ├── components/ # Reusable UI components (e.g., Header, ProductCard)
-│ ├── pages/ # Page components (e.g., Home, Cart, Login)
-│ ├── redux/ # Redux setup (actions, reducers, store)
-│ ├── assets/ # Images, styles, fonts
-│ ├── App.js # Main component with routing
-│ └── index.js # React entry point
-│
-└── server/ # Backend (Node.js/Express)
-├── routes/ # API routes (e.g., auth, products, cart)
-├── controllers/ # Logic for handling route requests
-├── models/ # MongoDB schemas (e.g., User, Product)
-├── config/ # Database and middleware configuration
-└── index.js # Server entry point
+├── client/                # React frontend
+│   ├── src/               # Source code for React
+│   ├── public/            # Static files like index.html
+│   └── package.json       # Frontend dependencies and scripts
+└── server/                # Node.js backend
+    ├── controllers/       # Backend logic
+    ├── models/            # Data models
+    ├── routes/            # API routes
+    ├── config/            # Configuration files
+    └── package.json       # Backend dependencies and scripts
 
 
 ## Features
 
-- **User Authentication**: Sign up, login, and password reset using JWT.
-- **Product Listing**: Browse clothing items with categories and filters.
-- **Shopping Cart**: Add/remove products and manage quantities.
-- **Responsive UI**: Mobile-friendly design built with React and styled-components.
-- **Payment Integration**: *Planned* integration with a payment gateway (e.g., Stripe).
+- **User Authentication**: Secure user authentication for sign-up, login, and password reset using JWT tokens.
+- **Product Listing**: Browse a wide range of clothing items with categories and filters.
+- **Shopping Cart**: Add, remove, and update product quantities in the shopping cart.
+- **Responsive UI**: Mobile-friendly design built using React and styled-components.
+- **Payment Integration**: *Planned* future integration with payment gateways like Stripe.
 
 ## Technologies Used
 
-- **Frontend**: React, Redux (state management), React Router (routing), Axios (API calls)
+- **Frontend**: React, React Router (routing), Axios (API calls)
 - **Backend**: Node.js, Express (REST API), MongoDB (database), Mongoose (ODM)
 - **Authentication**: JWT (JSON Web Tokens)
 - **Styling**: CSS, styled-components
@@ -116,7 +110,3 @@ If you’d like to contribute to DressAura, follow these steps:
 3. Commit your changes: `git commit -am 'Add new feature'`.
 4. Push to the branch: `git push origin feature-name`.
 5. Open a pull request with a detailed description of your changes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
