@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.hero-sec {
+    height: 100vh;
+    background-color: #0F0F0F;
+    width: 150%;
+    padding: 30px 0;
+}
+.hero-page{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.image {
+    background-image: url('../../assets/intro-logo.avif');
+    background-position: top;
+    height: 450px;
+    width: 370px;
+    margin-top: 130px;
+
+}
+
+.side-img {
+    background-image: url('../../assets/img-1.jpg');
+    background-position: left center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    cursor: pointer;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #0F0F0F;
+    overflow-x: hidden;
+}
+
+.info {
+    position: relative;
+    left: 30%;
+    top: -70%;
+    color: white;
+}
+
+.info h2 {
+    font-size: 5rem;
+    margin: 0;
+    letter-spacing: 5px;
+    font-family: 'Outfit';
+    text-transform: uppercase;
+    font-weight: 500;
+    word-spacing: 10px;
+    padding: 0;
+}
+
+.info h1 {
+    font-size: 6rem;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif
+}
+
+.p-info {
+    text-align: start;
+    margin-left: 140px;
+    margin-top: 50px;
+}
+
+.latest-pro {
+    margin-top: 50px;
+    height: 40px;
+    width: 500px;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    position: relative;
+    left: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+.latest-pro:hover {
+    border-color: #3B3486;
+    color: #FFC23C;
+}
+
+.latest-pro span {
+    font-family: 'Outfit';
+    letter-spacing: 3px;
+    word-spacing: 6px;
+}
+
+.hero .company-name {
+    position: relative;
+    top: -62%;
+    left: 10%;
+}
+
+.hero .company-name h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: #fff;
+    margin: 0;
+}
+.hover-letter {
+  display: inline-block;
+  transition: transform 0.5s ease, color 0.5s ease;
+}
+
+.hover-letter:hover {
+  color: #ffb703;
+  text-shadow: 0.4px 1px 1px rgba(255, 183, 3, 0.5);
+}
+.blurred {
+  filter: blur(1px);
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+

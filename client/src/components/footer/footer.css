@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+footer {
+  background-color: #0F0F0F;
+  color: white;
+  padding: 40px 150px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.abt-company {
+  flex: 1;
+  max-width: 350px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.abt-company h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-family: 'Outfit';
+  color: #ffb703;
+}
+
+.abt-company p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.abt-contact {
+  flex: 1;
+  max-width: 200px;
+  text-align: start;
+}
+
+.abt-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.abt-contact ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.abt-contact ul li:hover {
+  color: #ffb703;
+}
+
+.abt-more {
+  flex: 1;
+  max-width: 300px;
+  text-align: left;
+}
+
+.abt-more .soc-ic {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.abt-more .soc-ic .svg-inline--fa {
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.abt-more .soc-ic .svg-inline--fa:hover {
+  transform: scale(1.2);
+  color: #ffb703;
+}
+
+.about-more {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.about-more span {
+  margin-right: 10px;
+  color: #ffb703;
+}
+
+.about-more p {
+  display: inline;
+  font-size: 14px;
+  margin: 0;
+  padding-left: 14px;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .abt-company,
+  .abt-contact,
+  .abt-more {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .soc-icon {
+    justify-content: center;
+  }
+}

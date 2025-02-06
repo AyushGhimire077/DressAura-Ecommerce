@@ -1,0 +1,205 @@
+.navbar {
+  font-family: "Poppins", serif;
+  height: 134px;
+  width: 100%;
+  padding: 20px 0px;
+  padding-left: 40px;
+  text-align: center;
+  display: flex;
+  color: white;
+  margin: 1px 40px;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 1000;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  margin: 0 100px;
+}
+
+.nav-com ul {
+  display: flex;
+  gap: 34px;
+}
+
+.nav-com ul li {
+  list-style: none;
+  padding: 14px;
+  position: relative; /* For absolute positioning of the underline */
+}
+
+.nav-com ul li a {
+  text-decoration: none; /* Ensure no underline */
+  font-size: 19px;
+  color: white;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.nav-com ul li a:hover {
+  color: #455a64; /* Change color on hover */
+}
+
+.nav-com ul li a.active {
+  color: #ffb703; /* Active link color */
+}
+
+.nav-com ul li a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 5px;
+  background: #ffb703;
+  border-radius: 50%; /* Adds the curved shape to the underline */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-com ul li a.active:hover::after {
+  transform: scaleX(1); /* Smoothly expand on hover */
+}
+
+.menu-icon {
+  padding-top: 3px;
+}
+
+.auth a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.auth {
+  font-size: 24px;
+  color: white;
+  height: 50px;
+  padding: 10px;
+  width: 150px;
+  border: 1px solid #ffc23c;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: transparent;
+  overflow: hidden;
+  font-weight: bold;
+  transition:
+    color 0.9s,
+    border-color 0.3s;
+  margin: 0 30px;
+  z-index: 1;
+  margin: auto 80px;
+  overflow: hidden;
+}
+
+.auth::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1e90ff;
+  z-index: -1;
+  transition: top 0.6s ease-out;
+}
+
+.auth:hover::before {
+  top: 0;
+  animation: waveDrop 1s ease-out forwards;
+}
+
+.auth:not(:hover)::before {
+  animation: waveDropReverse 1s ease-out forwards;
+  color: #fff;
+  border-color: #1e90ff;
+}
+
+@keyframes waveDrop {
+  0% {
+    top: -100%;
+  }
+  50% {
+    top: 25%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes waveDropReverse {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 25%;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
+.auth:hover {
+  color: #fff;
+  border-color: #1e90ff;
+}
+
+.cart {
+  color: white;
+  position: relative;
+}
+
+.cart::before {
+  content: "";
+  position: absolute;
+  top: 48px;
+  right: -800px;
+  background-color: purple;
+  height: 4px;
+  width: 50px;
+  transition: all 0.3s ease-in;
+}
+
+.cart:hover::before {
+  right: -8px;
+}
+
+.cart:hover {
+  color: whitesmoke;
+}
+
+.user {
+  margin: auto 80px;
+  font-size: 24px;
+  color: rgb(236, 236, 236);
+  height: 70px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: 0.6s ease;
+  background:
+    linear-gradient(rgb(12, 7, 7), rgba(7, 6, 6, 0.895)) padding-box,
+    linear-gradient(2deg, #fff, #ffb703) border-box;
+}
+
+.user:hover {
+  color: #0f0f0f;
+  background:
+    linear-gradient(rgb(208, 207, 207), rgba(252, 252, 252, 0.895)) padding-box,
+    linear-gradient(2deg, #fff, #ffb703) border-box;
+}
+
+.user.transparent {
+  background: transparent;
+  border: none;
+}

@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# React Client (build and other files)
+client/build/
+client/node_modules/
+client/.env
+
+# Server (Node.js)
+server/node_modules/
+server/.env
+
+# Log files
+*.log
+
+# Temporary files
+*.bak
+*.tmp

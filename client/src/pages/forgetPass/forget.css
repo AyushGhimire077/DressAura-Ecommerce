@@ -1,0 +1,174 @@
+.forgot-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0F0F0F;
+  font-family: 'Poppins', sans-serif;
+}
+
+.forgot-page .for-img {
+  border-radius: 50%;
+  height: 440px;
+  width: 440px;
+  border: 2.4px solid #fff;
+  overflow: hidden;
+  animation: blurImg 1s ease-in-out alternate forwards;
+}
+@keyframes blurImg {
+  from{
+     opacity: 0;
+  }
+  to{
+     opacity: 1;
+  }
+}
+
+.forgot-page .forget-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 470px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: float 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  animation: sideEntry 0.4s ease-out forwards;
+}
+@keyframes sideEntry {
+  from{
+     transform: translateX(100%);
+     opacity: 0;
+  }
+  to{
+     transform: translateX(0);
+     opacity: 1;
+  }
+}
+
+.forgot-page .form-container {
+  position: relative;
+  min-height: 400px;
+}
+
+.forgot-page .form-section {
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.forgot-page .form-section.active {
+  opacity: 1;
+  transition: all 0.6s ease-in-out;
+  transform: translateX(0);
+}
+
+.forgot-page .form-section.inactive {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.forgot-page h1 {
+  font-size: 32px;
+  color: #0F0F0F;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.forgot-page p {
+  color: #222831;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.forgot-page input {
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.forgot-page input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  outline: none;
+}
+
+.forgot-page button[type="submit"],
+.forgot-page button[type="button"] {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.forgot-page button[type="submit"]:hover,
+.forgot-page button[type="button"]:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.forgot-page .switch-btn {
+  background: none;
+  border: none;
+  color: #222831;
+  font-weight: 600;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.forgot-page .switch-btn:hover {
+  color: #393E46;
+  text-decoration: underline;
+}
+
+.forgot-page .go-back {
+  background: none;
+  border: none;
+  color: #718096;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  margin: 70px auto 0;
+  transition: all 0.3s ease;
+}
+
+.forgot-page .go-back:hover {
+  color: #2d3748;
+  transform: translateX(-5px);
+}
+
+.forgot-page .switch-text {
+  margin: 20px;
+}
+
+
+@media (max-width: 480px) {
+  .forgot-page .forget-container {
+    padding: 25px;
+    margin: 15px;
+  }
+
+  .forgot-page h1 {
+    font-size: 24px;
+  }
+
+  .forgot-page input,
+  .forgot-page button {
+    padding: 12px;
+  }
+}
