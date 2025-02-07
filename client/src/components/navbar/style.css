@@ -12,7 +12,6 @@
   justify-content: space-between;
   position: absolute;
   z-index: 1000;
-  overflow: hidden;
 }
 
 .nav-icons {
@@ -29,11 +28,11 @@
 .nav-com ul li {
   list-style: none;
   padding: 14px;
-  position: relative; /* For absolute positioning of the underline */
+  position: relative; 
 }
 
 .nav-com ul li a {
-  text-decoration: none; /* Ensure no underline */
+  text-decoration: none;
   font-size: 19px;
   color: white;
   position: relative;
@@ -42,11 +41,11 @@
 }
 
 .nav-com ul li a:hover {
-  color: #455a64; /* Change color on hover */
+  color: #455a64; 
 }
 
 .nav-com ul li a.active {
-  color: #ffb703; /* Active link color */
+  color: #ffb703; 
 }
 
 .nav-com ul li a.active::after {
@@ -57,14 +56,14 @@
   width: 100%;
   height: 5px;
   background: #ffb703;
-  border-radius: 50%; /* Adds the curved shape to the underline */
+  border-radius: 50%;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease-in-out;
 }
 
 .nav-com ul li a.active:hover::after {
-  transform: scaleX(1); /* Smoothly expand on hover */
+  transform: scaleX(1)
 }
 
 .menu-icon {
@@ -148,7 +147,8 @@
 }
 
 .auth:hover {
-  color: #fff;
+    color: rgb(203, 136, 203);
+
   border-color: #1e90ff;
 }
 
@@ -157,19 +157,15 @@
   position: relative;
 }
 
-.cart::before {
+.cart:hover::before {
   content: "";
   position: absolute;
   top: 48px;
-  right: -800px;
-  background-color: purple;
-  height: 4px;
-  width: 50px;
-  transition: all 0.3s ease-in;
-}
-
-.cart:hover::before {
   right: -8px;
+  color: rgb(203, 136, 203);
+  background-color: rgb(203, 136, 203);
+  height: 1.8px;
+  width: 50px;
 }
 
 .cart:hover {

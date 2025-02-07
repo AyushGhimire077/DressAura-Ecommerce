@@ -21,7 +21,7 @@ const Navbar = () => {
     return null;
   }
 
-  const handleClickUser = () => setShowUserAcc(true);
+const handleClickUser = () => setShowUserAcc(true);
 
   return (
     <div className="navbar">

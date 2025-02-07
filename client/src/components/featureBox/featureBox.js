@@ -11,7 +11,7 @@ const FeatureBox = () => {
     "SECURE PAYMENT",
   ];
 
-  const featureRefs = useRef([]);
+  const featureRefs = useRef([]); 
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,14 +27,19 @@ const FeatureBox = () => {
       { threshold: 0.3 }
     );
 
-    featureRefs.current.forEach((feature) => {
-      observer.observe(feature);
-    });
+    featureRefs.current
+      .filter((feature) => feature !== null)
+      .forEach((feature) => {
+        observer.observe(feature);
+      });
 
     return () => {
-      featureRefs.current.forEach((feature) => {
-        observer.unobserve(feature);
-      });
+      featureRefs.current
+        .filter((feature) => feature !== null)
+        .forEach((feature) => {
+          observer.unobserve(feature);
+        });
+      observer.disconnect();
     };
   }, []);
 
@@ -43,22 +48,22 @@ const FeatureBox = () => {
       <div className="feature-container">
         <h1>Our Features</h1>
         <div className="features">
-          {images.map((image, index) => {
-            return (
-              <div
-                key={index}
-                ref={(el) => (featureRefs.current[index] = el)}
-                className="feature"
-              >
-                <div className="fea-img">
-                  <img src={image} alt="img" />
-                </div>
-                <div className="fea-name">
-                  <h1>{names[index]}</h1>
-                </div>
+          {images.map((image, index) => (
+            <div
+              key={index}
+              ref={(el) => {
+                if (el) featureRefs.current[index] = el;
+              }}
+              className="feature"
+            >
+              <div className="fea-img">
+                <img src={image} alt="Feature" />
               </div>
-            );
-          })}
+              <div className="fea-name">
+                <h1>{names[index]}</h1>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

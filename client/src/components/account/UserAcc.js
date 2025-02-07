@@ -4,7 +4,6 @@ import {
   faUser,
   faPhone,
   faEnvelope,
-  faShieldAlt,
   faCheckCircle,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";

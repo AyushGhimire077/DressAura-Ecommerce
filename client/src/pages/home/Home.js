@@ -4,39 +4,50 @@ import Navbar from "../../components/navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { AuthRoute } from "../../context/authContext";
-import toast from "react-hot-toast";
 import FeatureBox from "../../components/featureBox/featureBox";
 import About from "../../components/about/About";
+import axios from "axios";
 
 const Home = ({ aboutRef }) => {
   const [isBlurred, setIsBlurred] = useState(true);
-  const { checkVerified } = useContext(AuthRoute);
+  const { backendURI, isLogin } = useContext(AuthRoute);
+
+  const trackVisit = async () => {
+    try {
+      if (isLogin) {
+        const { data, status } = await axios.post(
+          `${backendURI}/api/auth/track-visit`,
+          {},
+          { withCredentials: true }
+        );
+        console.log("Backend Response Status:", status);
+        console.log("Response from backend:", data);
+      }
+    } catch (error) {
+      console.error("Error tracking visit:", error);
+    }
+  };
 
   useEffect(() => {
-    if (checkVerified === true) {
-      toast.success("Please login again to make changes");
-    }
-  }, [checkVerified]);
+    trackVisit();
+  }, [isLogin]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsBlurred(false);
     }, 300);
-
     return () => clearTimeout(timer);
   }, []);
 
-  const hoverText = ({ text }) => {
-    return (
-      <h2 className={`hover-text ${isBlurred ? "blurred" : ""}`}>
-        {text.split("").map((char, index) => (
-          <span key={index} className="hover-letter">
-            {char === " " ? "\u00A0" : char}
-          </span>
-        ))}
-      </h2>
-    );
-  };
+  const hoverText = ({ text }) => (
+    <h2 className={`hover-text ${isBlurred ? "blurred" : ""}`}>
+      {text.split("").map((char, index) => (
+        <span key={index} className="hover-letter">
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </h2>
+  );
 
   return (
     <>

@@ -7,7 +7,7 @@ import "./verify.css";
 
 const Verify = () => {
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState(0);
+  const [otp, setOtp] = useState();
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
 
