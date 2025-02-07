@@ -290,8 +290,6 @@ const verifyEmail = async (req, res) => {
   }
 };
 
-
-
 const resetOtt = async (req, res) => {
   const { email } = req.body;
 
@@ -372,6 +370,43 @@ const resetPasswrod = async (req, res) => {
     return res.json({ success: false, message: "Internal server error" });
   }
 };
+
+
+const visitedAt = async (req, res) => {
+  
+  if (!req.id) {
+    return res
+      .status(401)
+      .json({ success: false, message: "User is not logged in" });
+  }
+
+  const userId = req.id;
+  const userVisit = new Date();
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { visitedAt: userVisit },
+      { new: true }
+    );
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User visit tracked successfully",
+      visitedAt: user.visitedAt,
+    });
+  } catch (error) {
+    console.error("Error tracking user visit:", error);
+    res.status(500).json({ success: false, message: "Error tracking visit" });
+  }
+};
+
 export {
   registerAuth,
   loginAuth,
@@ -381,4 +416,5 @@ export {
   verifyEmail,
   resetOtt,
   resetPasswrod,
+  visitedAt,
 };

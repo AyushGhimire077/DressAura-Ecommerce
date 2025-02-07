@@ -11,6 +11,7 @@ const authSchema = new mongoose.Schema({
   verifyOttExpireAt: { type: Date, default: null },
   resetOtt: { type: String, default: "" },
   resetOttExpireAt: { type: Date, default: null },
+  visitedAt:{ type: Date, default: Date.now }
 });
 
 const User = mongoose.model('User', authSchema);
