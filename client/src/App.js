@@ -5,6 +5,7 @@ import Auth from "./pages/auth/Auth";
 import Footer from "./components/footer/Footer";
 import ForgetPass from "./pages/forgetPass/ForgetPass";
 import Verify from "./pages/verify-page/Verify";
+import Product from "./pages/product/Product";
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/auth-page" element={<Auth />} />
           <Route path="/forget-password" element={<ForgetPass />} />
           <Route path="/verify-email" element={<Verify />} />
+          <Route path="/products" element={<Product />} />
         </Routes>
       </Router>
       <Footer />

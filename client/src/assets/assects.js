@@ -6,3 +6,13 @@ const images = [
 ];
 
 export default images;
+
+const productImages = {
+  acess: require('./acess.jpg'),
+  activeWare: require('./activeware.jpg'),
+  lower: require('./lower.jfif'),
+  upper: require('./upper.jpg'),
+  shoes: require('./shop-img.avif')
+};
+
+export { productImages};

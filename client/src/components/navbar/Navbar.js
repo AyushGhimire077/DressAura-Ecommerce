@@ -40,8 +40,8 @@ const handleClickUser = () => setShowUserAcc(true);
           </li>
           <li>
             <Link
-              to="/product"
-              className={location.pathname === "/product" ? "active" : ""}
+              to="/products"
+              className={location.pathname === "/products" ? "active" : ""}
             >
               Product
             </Link>
