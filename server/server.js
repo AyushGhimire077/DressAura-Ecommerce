@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/connectDB.js';
 import { authRouter } from './routes/authRoute.js';
 import productRouter from './routes/productRoute.js';
-import cloudinary from './config/cloudinary.js'
 
 const app = express();
 
@@ -19,17 +18,20 @@ connectDB();
 dotenv.config();
 
 //middleware
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true, 
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
 
 //endpoints
 app.use('/api/auth',authRouter);
-app.use('/api/admin',productRouter)
+app.use('/api/admin', productRouter);
 
 const port = process.env.PORT || 4000
 
