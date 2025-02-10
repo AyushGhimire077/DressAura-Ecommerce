@@ -1,0 +1,73 @@
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faBox,
+  faUsers,
+  faFileAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
+const Sidebar = () => {
+  const location = useLocation();
+
+  const isActiveLink = (path) => location.pathname === path;
+
+  return (
+    <div className="sidebar-container">
+      <div className="sidebar-head">
+        <h1>THE FISH BOWL</h1>
+        <h3>Admin Panel</h3>
+      </div>
+      <hr />
+      <div className="sidebar-comp">
+        <div
+          className={`comp-box ${
+            isActiveLink("/admin/dashboard") ? "active" : ""
+          }`}
+        >
+          <Link to="/admin/dashboard" className="link">
+            <FontAwesomeIcon icon={faHome} className="icon" />
+            <h3>DashBoard</h3>
+          </Link>
+        </div>
+
+        <div
+          className={`comp-box ${
+            isActiveLink("/admin/manage-product") ? "active" : ""
+          }`}
+        >
+          <Link to="/admin/manage-product" className="link">
+            <FontAwesomeIcon icon={faBox} className="icon" />
+            <h3>Manage Product</h3>
+          </Link>
+        </div>
+
+        <div
+          className={`comp-box ${
+            isActiveLink("/admin/manage-users") ? "active" : ""
+          }`}
+        >
+          <Link to="/admin/manage-users" className="link">
+            <FontAwesomeIcon icon={faUsers} className="icon" />
+            <h3>Manage Users</h3>
+          </Link>
+        </div>
+
+        <div
+          className={`comp-box ${
+            isActiveLink("/admin/reports") ? "active" : ""
+          }`}
+        >
+          <Link to="/admin/reports" className="link">
+            <FontAwesomeIcon icon={faFileAlt} className="icon" />
+            <h3>Reports</h3>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

@@ -1,0 +1,74 @@
+.sidebar-container{
+    height: 100vh;
+    width: 320px;
+    background-color: #0F0F0F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0%;
+    padding: 40px 0;
+    color: #ccc;
+}
+.sidebar-head{
+     text-align: center;
+    color: #ccc;
+}
+.sidebar-head h1{
+    font-size: 30px;
+}
+.sidebar-head h3{
+    font-size: 22px;
+    color: #ccc;
+}
+.sidebar-container hr{
+    color: whitesmoke;
+    height: 1px;
+    width: 80%;
+    margin: 10px auto;
+}
+.sidebar-comp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 24px;
+    margin-top: 30px;
+    padding-right: 44px;
+}
+.comp-box{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+}
+
+.comp-box a{
+    text-decoration: none;
+    color: #ccc;
+    cursor: pointer;
+}
+.link{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.comp-box h3{
+    font-size: 1rem;
+}
+.showMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 20px;
+    transition: all 0.5s ease-in-out;
+}
+.comp-box.active .icon {
+  color: goldenrod;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, color 0.3s ease; 
+}
+.comp-box.active h3{
+    color: goldenrod;
+}
