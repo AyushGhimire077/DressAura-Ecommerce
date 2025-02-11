@@ -11,7 +11,6 @@ const addProduct = async (req, res) => {
   // check if all required fields are provided
   if (!name || !price || !description || !req.file || !stock || !category) {
     return res
-      .status(400)
       .json({ success: false, message: "All fields are required" });
   }
 
