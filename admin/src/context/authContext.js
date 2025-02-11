@@ -46,10 +46,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      checkToken();
+      checkToken(); 
     }, 6000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); 
   }, []);
 
   return (
@@ -60,6 +60,7 @@ export const AuthProvider = ({ children }) => {
         backendURI,
         setUserData,
         userData,
+        checkToken,
       }}
     >
       {children}

@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./dash.css";
 import axios from "axios";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 
 import {
   LineChart,
@@ -16,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { AuthRoute } from "../../context/authContext";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const data = [
   { month: "Jan", sales: 40000, users: 24000 },
@@ -36,53 +34,62 @@ const totalSales = data.reduce((sum, item) => sum + item.sales, 0);
 const totalUsers = data.reduce((sum, item) => sum + item.users, 0);
 
 const Dashboard = () => {
-  const [value, onChange] = useState(new Date());
-
-  const today = new Date();
-
-  const minDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
   const { backendURI } = useContext(AuthRoute);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [category, setCategory] = useState("");
+  const [stock, setStock] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name || !price || !description || !image || !category || !stock) {
+      toast.error("All fields are required");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
     formData.append("image", image);
+    formData.append("category", category);
+    formData.append("stock", stock);
 
     try {
-      const response = await axios.post(
+      setIsLoading(true);
+      const { data } = await axios.post(
         `${backendURI}/api/admin/add-product`,
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          withCredentials: true,
         }
       );
 
-      if (response && response.data) {
-        const { data } = response;
-        if (data.success) {
-          toast.success(data.message);
-        } else {
-          toast.error(data.message);
-        }
+      if (data.success) {
+        toast.success(data.message);
+        setName("");
+        setPrice("");
+        setDescription("");
+        setImage(null);
+        setCategory("");
+        setStock("");
       } else {
-        toast.error("Unexpected response structure.");
+        toast.error(data.message);
+        console.log(data.message);
       }
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while adding the product.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -91,42 +98,40 @@ const Dashboard = () => {
       <div className="content-wrapper">
         <h2 className="chart-title">Sales and Users Statistics</h2>
         <div className="chat-container">
-          <div className="chat-container">
-            <div className="chart-box">
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={data}>
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="sales"
-                    stroke="#007bff"
-                    strokeWidth={2}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-              <div className="total-box">
-                <h4>Total Sales</h4>
-                <p>${totalSales.toLocaleString()}</p>
-              </div>
+          <div className="chart-box">
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={data}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="sales"
+                  stroke="#007bff"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+            <div className="total-box">
+              <h4>Total Sales</h4>
+              <p>${totalSales.toLocaleString()}</p>
             </div>
+          </div>
 
-            <div className="chart-box">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="users" fill="#FFA500" />
-                </BarChart>
-              </ResponsiveContainer>
-              <div className="total-box">
-                <h4>Total Users:</h4>
-                <p>{totalUsers.toLocaleString()}</p>
-              </div>
+          <div className="chart-box">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={data}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="users" fill="#FFA500" />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="total-box">
+              <h4>Total Users:</h4>
+              <p>{totalUsers.toLocaleString()}</p>
             </div>
           </div>
         </div>
@@ -148,38 +153,55 @@ const Dashboard = () => {
               placeholder="Product Description"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <input
-              type="file"
-              value={image}
-              placeholder="Product Image"
-              onChange={(e) => setImage(e.target.value)}
-            />
+
             <input
               type="number"
               value={price}
               placeholder="Product Price"
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
             />
-            <button class="submit-btn">Submit</button>
+            <input
+              type="number"
+              value={stock}
+              placeholder="Stock"
+              onChange={(e) => setStock(Number(e.target.value))}
+              required
+            />
+            <input
+              type="file"
+              accept="image/*"
+              className="img"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+              className="select-cat"
+            >
+              <option value="">Select Category</option>
+              <option value="Upper">Upper</option>
+              <option value="Lower">Lower</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Shoes">Shoes</option>
+            </select>
+
+            <button
+              type="submit"
+              className={`submit-btn ${isLoading ? "loading" : ""}`}
+              disabled={isLoading}
+            >
+              {isLoading ? "Adding Product..." : "Submit"}
+            </button>
           </form>
         </div>
 
         <div className="more-info-box">
-          <div class="total-box">
-            <h1>Month Sell - Rs4000</h1>
-          </div>
-          <div class="total-box">
-            <h1>Totel Sell - Rs103000</h1>
-          </div>
-          <div class="total-box">
-            <h1>Totel Users - Rs390</h1>
-          </div>
-          <div class="total-box">
-            <h1>Totel Users - Rs390</h1>
+          <h1>THE DRESS AURA</h1>
+          <h2>Admin Pannel</h2>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

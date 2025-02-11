@@ -1,0 +1,20 @@
+.unauth-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: black;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+.isAdmin {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+
+}
+.isAdmin:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

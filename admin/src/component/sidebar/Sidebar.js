@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Cookies from 'js-cookie'
 import "./sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,11 +9,25 @@ import {
   faUsers,
   faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthRoute } from "../../context/authContext";
 
 const Sidebar = () => {
   const location = useLocation();
 
+  const { setIsLogin,isLogin, userData } = useContext(AuthRoute);
+
   const isActiveLink = (path) => location.pathname === path;
+
+  if (!isLogin || userData?.role !== 'admin') {
+    return <div className="sidebar-container">
+      <div className="sidebar-img">    </div>
+    </div>;
+  }
+
+  const handleLogout = () => {
+    Cookies.remove('token');
+    setIsLogin(false)
+  }
 
   return (
     <div className="sidebar-container">
@@ -65,6 +80,9 @@ const Sidebar = () => {
             <h3>Reports</h3>
           </Link>
         </div>
+      </div>
+      <div class="logout">
+        <p onClick={handleLogout}>Logout</p>
       </div>
     </div>
   );

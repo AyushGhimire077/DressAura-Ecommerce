@@ -1,32 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
 .auth-container {
-  height: 100vh;
+  height: 101vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #000000, #141414, #131212, #252222, #ffffff);
-  background-size: 400% 400%;
+  background: linear-gradient(15deg, #000000, #141414, #610C9F);
   position: relative;
+  overflow: hidden;
 }
 
 .auth-img img {
   height: 540px;
   width: auto;
-}
-
-.auth-img {
-  height: auto;
-  width: auto;
-  background-position: center;
-  border-radius: 100px;
-  border: 3px solid rgb(23, 22, 22);
-  overflow: hidden;
-  object-fit: cover;
-  margin: auto 100px auto;
-  max-width: 90%;
-  animation: blurEffect 0.6s ease-in-out forwards;
 }
 
 @keyframes blurEffect {
@@ -39,22 +26,9 @@
     z-index: 1;
   }
 }
-
-.auth-box {
-  display: flex;
-  width: 850px;
-  height: 560px;
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  margin-right: 100px;
-  animation: sideEntry 0.5s forwards;
-}
-
 .form-wrapper {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   background: rgb(239, 238, 237);
   padding: 40px;
   display: flex;
@@ -63,6 +37,7 @@
   align-items: center;
   border-radius: 12px;
   text-align: center;
+  margin: auto auto;
 }
 
 .form-wrapper h2 {
@@ -141,7 +116,7 @@
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 6px;
   outline: none;
   border: 1.5px solid transparent;
   text-align: center;

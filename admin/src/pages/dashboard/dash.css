@@ -82,8 +82,9 @@ p {
   width: 380px;
   background-color: whitesmoke;
   align-items: center;
-  height: 400px;
+  height: auto;
   cursor: pointer;
+  padding: 20px;
   justify-content: center;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -91,7 +92,6 @@ p {
 .submit-btn {
   height: 36px;
   width: 150px;
-  border: 2px solid blueviolet;
   border-radius: 14px;
   color: black;
   cursor: pointer;
@@ -107,26 +107,29 @@ p {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  background:linear-gradient(15deg, #181818, rgba(0, 0, 0, 0.668));
-  height: 200px;
+  height: auto;
+background-color: whitesmoke; 
   width: 400px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 30px;
 }
-.more-info-box .total-box{
-  height: 70px;
-  width: 150px;
-  border: 1px solid black;
-  border-radius: 14px;
-  display: flex;
-  background-color: #ccc;
-  align-items: center;
-  justify-content: center;
-  margin: 15px;
+.select-cat{
+  height: 34px;
+  border-radius: 8px;
+  width: 140px;
+  outline: none;
 }
-.total-box h1{
-  font-size: 14px;
-  font-weight: 500;
-  color: #0F0F0F;
+.submit-btn.loading {
+  background: linear-gradient(90deg, #007bff, #0056b3, #007bff);
+  background-size: 200% 200%;
+  animation: loadingAnimation 1.5s infinite;
+  cursor: not-allowed;
 }
+
+@keyframes loadingAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
