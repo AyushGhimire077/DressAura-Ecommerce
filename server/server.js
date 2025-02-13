@@ -7,6 +7,9 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/connectDB.js';
 import { authRouter } from './routes/authRoute.js';
 import productRouter from './routes/productRoute.js';
+import { orderRouter } from "./routes/orderRoute.js";
+import showProduct from './routes/showProducts.js';
+import PaymentRouter from './routes/payment.js';
 
 const app = express();
 
@@ -32,6 +35,9 @@ app.use(cookieParser());
 //endpoints
 app.use('/api/auth',authRouter);
 app.use('/api/admin', productRouter);
+app.use("/api", orderRouter);
+app.use('/api', showProduct);
+app.use('/api', PaymentRouter);
 
 const port = process.env.PORT || 4000
 

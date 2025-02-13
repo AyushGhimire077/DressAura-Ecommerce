@@ -51,16 +51,4 @@ const addProduct = async (req, res) => {
   }
 };
 
-const getProducts = async (req, res) => {
-  try {
-    const products = await Product.find(); 
-    return res.status(200).json({ success: true, products });
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Error fetching products" });
-  }
-};
-
-export { addProduct, getProducts };
+export { addProduct};
