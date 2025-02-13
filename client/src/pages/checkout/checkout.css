@@ -1,0 +1,106 @@
+.checkout-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.check-head {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user-info {
+  margin-bottom: 30px;
+}
+
+.user-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.payment-methods {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.payment-methods h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.payment-option {
+  margin-bottom: 15px;
+}
+
+.payment-method {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-method:hover {
+  background-color: #0056b3;
+}
+
+.payment-method.esewa-method {
+  background-color: #4bca8e;
+}
+
+.payment-method.esewa-method:hover {
+  background-color: #3a9e73;
+}
+
+.payment-method:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+textarea:focus,
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}

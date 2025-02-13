@@ -7,7 +7,7 @@ import UserAcc from "../../components/account/UserAcc";
 import "./style.css";
 
 const Navbar = () => {
-  const { isLogin } = useContext(AuthRoute);
+  const { isLogin,cart } = useContext(AuthRoute);
   const [showUserAcc, setShowUserAcc] = useState(false);
   const [isAuthLoaded, setIsAuthLoaded] = useState(false);
 
@@ -31,10 +31,7 @@ const handleClickUser = () => setShowUserAcc(true);
             <FontAwesomeIcon className="menu-icon" icon={faBars} size="xl" />
           </li>
           <li>
-            <Link
-              to="/"
-              className={location.pathname === "/" ? "active" : ""}
-            >
+            <Link to="/" className={location.pathname === "/" ? "active" : ""}>
               Home
             </Link>
           </li>
@@ -66,8 +63,14 @@ const handleClickUser = () => setShowUserAcc(true);
       </div>
       <div className="nav-icons">
         <div className="cart">
-          <FontAwesomeIcon icon={faCartShopping} size="2xl" />
+          <Link to="/cart" className="cart-link">
+            <FontAwesomeIcon icon={faCartShopping} size="2xl" />
+            {cart.length > 0 && (
+              <span className="cart-badge">{cart.length}</span>
+            )}
+          </Link>
         </div>
+
         {!isLogin && (
           <div className="auth">
             <p>

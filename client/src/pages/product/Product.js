@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./product.css";
 import Navbar from "../../components/navbar/Navbar";
+import { AuthRoute } from "../../context/authContext";
 import { productImages } from "../../assets/assects";
 
 const Product = () => {
+  const {
+    products,
+    addToCart,
+    fetchProducts,
+    cart,
+    updateCartQuantity,
+    removeFromCart,
+  } = useContext(AuthRoute);
+  const [activeUser, setActiveUser] = useState("Activeware");
 
-  const [activeUser, setActiveUser] = useState('Activeware');
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const handleCategoryClick = (category) => {
     setActiveUser(category);
-  }
-  
+  };
+
+  const filteredProducts = products.filter(
+    (product) => product.category === activeUser
+  );
 
   return (
     <div className="product-container">
@@ -25,54 +40,92 @@ const Product = () => {
         </div>
 
         <div className="product-category">
-          <div class="cat-head">
+          <div className="cat-head">
             <h1>Categories</h1>
           </div>
           <div className="cat-box-container">
-            <div
-              className={`cat-box ${activeUser === "Activeware" ? "active" : ""}`}
-              onClick={() => handleCategoryClick("Activeware")}
-            >
-              <img src={productImages.activeWare} alt="img" />
-              <div className="text-overlay">Activewear</div>
-            </div>
-
-            <div
-              className={`cat-box ${activeUser === "Upper" ? "active" : ""}`}
-              onClick={() => handleCategoryClick("Upper")}
-            >
-              <img src={productImages.upper} alt="img" />
-              <div className="text-overlay">Upper</div>
-            </div>
-
-            <div
-              className={`cat-box ${activeUser === "Lower" ? "active" : ""}`}
-              onClick={() => handleCategoryClick("Lower")}
-            >
-              <img src={productImages.lower} alt="img" />
-              <div className="text-overlay">Lower</div>
-            </div>
-
-            <div
-              className={`cat-box ${activeUser === "Shoes" ? "active" : ""}`}
-              onClick={() => handleCategoryClick("Shoes")}
-            >
-              <img src={productImages.shoes} alt="img" />
-              <div className="text-overlay">Shoes</div>
-            </div>
-
-            <div
-              className={`cat-box ${activeUser === "Accessories" ? "active" : ""}`}
-              onClick={() => handleCategoryClick("Accessories")}
-            >
-              <img src={productImages.acess} alt="img" />
-              <div className="text-overlay">Accessories</div>
-            </div>
+            {[
+              { name: "Activeware", img: productImages.activeWare },
+              { name: "Upper", img: productImages.upper },
+              { name: "Lower", img: productImages.lower },
+              { name: "Shoes", img: productImages.shoes },
+              { name: "Accessories", img: productImages.acess },
+            ].map((category) => (
+              <div
+                key={category.name}
+                className={`cat-box ${activeUser === category.name ? "active" : ""}`}
+                onClick={() => handleCategoryClick(category.name)}
+              >
+                <img
+                  src={category.img}
+                  alt={category.name}
+                  className="product-img"
+                />
+                <div className="text-overlay">{category.name}</div>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="pro-cart-container">
-          <div className="cart"></div>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => {
+              const cartItem = cart.find((item) => item._id === product._id);
+
+              return (
+                <div key={product._id} className="product-card">
+                  <img
+                    src={product.image?.url}
+                    alt={product.name}
+                    className="product-img"
+                  />
+                  <h2 className="product-name">{product.name}</h2>
+                  <h2 className="product-desc">{product.description}</h2>
+                  <p className="product-price">Rs.{product.price}</p>
+
+                  {cartItem ? (
+                    <div className="cart-controls">
+                      <button
+                        className="decrease-btn"
+                        onClick={() => {
+                          if (cartItem.quantity === 1) {
+                            removeFromCart(product._id);
+                          } else {
+                            updateCartQuantity(
+                              product._id,
+                              cartItem.quantity - 1
+                            );
+                          }
+                        }}
+                      >
+                        -
+                      </button>
+                      <span className="cart-quantity">{cartItem.quantity}</span>
+                      <button
+                        className="increase-btn"
+                        onClick={() =>
+                          updateCartQuantity(product._id, cartItem.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="add-to-cart-btn"
+                      onClick={() => addToCart(product)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <p className="no-products">
+              No products available for {activeUser}
+            </p>
+          )}
         </div>
       </div>
     </div>
