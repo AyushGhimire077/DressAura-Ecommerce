@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthRoute } from "./context/authContext";
 import Unauthorized from "./pages/unauth/Unauthorized";
 import Auth from "./pages/auth/Auth";
+import Order from "./pages/orders/Order";
 
 const App = () => {
   const { isLogin, checkToken } = useContext(AuthRoute);
@@ -62,6 +63,7 @@ const App = () => {
                   path="/admin/manage-product"
                   element={<ManageProduct />}
                 />
+                <Route path="/admin/orders" element={<Order/> }/>
                 <Route path="/admin/manage-users" element={<ManageUsers />} />
                 <Route path="/admin/reports" element={<Reports />} />
               </>

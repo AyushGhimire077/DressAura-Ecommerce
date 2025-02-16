@@ -47,7 +47,6 @@ const Sidebar = () => {
             <h3>DashBoard</h3>
           </Link>
         </div>
-
         <div
           className={`comp-box ${
             isActiveLink("/admin/manage-product") ? "active" : ""
@@ -58,6 +57,17 @@ const Sidebar = () => {
             <h3>Manage Product</h3>
           </Link>
         </div>
+        <div
+          className={`comp-box ${
+            isActiveLink("/admin/orders") ? "active" : ""
+          }`}
+        >
+          <Link to="/admin/orders" className="link">
+            <FontAwesomeIcon icon={faBox} className="icon" />
+            <h3>Orders</h3>
+          </Link>
+        </div>
+
 
         <div
           className={`comp-box ${

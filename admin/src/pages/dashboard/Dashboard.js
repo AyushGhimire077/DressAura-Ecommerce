@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./dash.css";
 import axios from "axios";
-
 import {
   LineChart,
   Line,
@@ -30,8 +29,13 @@ const data = [
   { month: "Nov", sales: 52000, users: 34000 },
 ];
 
-const totalSales = data.reduce((sum, item) => sum + item.sales, 0);
-const totalUsers = data.reduce((sum, item) => sum + item.users, 0);
+const ordersData = [
+  { id: 1, productName: "Product 1", status: "Pending" },
+  { id: 2, productName: "Product 2", status: "Completed" },
+  { id: 3, productName: "Product 3", status: "Pending" },
+  { id: 4, productName: "Product 4", status: "Completed" },
+  { id: 5, productName: "Product 5", status: "Pending" },
+];
 
 const Dashboard = () => {
   const { backendURI } = useContext(AuthRoute);
@@ -43,6 +47,14 @@ const Dashboard = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Calculate total sales
+  const totalSales = data.reduce((acc, curr) => acc + curr.sales, 0);
+
+  // Filter out completed orders
+  const pendingOrders = ordersData.filter(
+    (order) => order.status !== "Completed"
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,7 +95,6 @@ const Dashboard = () => {
         setStock("");
       } else {
         toast.error(data.message);
-        console.log(data.message);
       }
     } catch (error) {
       console.error(error);
@@ -129,10 +140,6 @@ const Dashboard = () => {
                 <Bar dataKey="users" fill="#FFA500" />
               </BarChart>
             </ResponsiveContainer>
-            <div className="total-box">
-              <h4>Total Users:</h4>
-              <p>{totalUsers.toLocaleString()}</p>
-            </div>
           </div>
         </div>
       </div>
@@ -153,7 +160,6 @@ const Dashboard = () => {
               placeholder="Product Description"
               onChange={(e) => setDescription(e.target.value)}
             />
-
             <input
               type="number"
               value={price}
@@ -196,12 +202,22 @@ const Dashboard = () => {
           </form>
         </div>
 
-        <div className="more-info-box">
-          <h1>THE DRESS AURA</h1>
-          <h2>Admin Pannel</h2>
-          </div>
+        <div className="orders-container">
+          <h2>Pending Orders</h2>
+          {pendingOrders.length === 0 ? (
+            <p>No pending orders</p>
+          ) : (
+            <ul>
+              {pendingOrders.map((order) => (
+                <li key={order.id}>
+                  {order.productName} - {order.status}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
+    </div>
   );
 };
 

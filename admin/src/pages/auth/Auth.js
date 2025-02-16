@@ -8,7 +8,7 @@ import "./style.css";
 
 const Auth = () => {
   const navigate = useNavigate();
-  const { backendURI } = useContext(AuthRoute);
+  const { backendURI,setIsLogin } = useContext(AuthRoute);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,6 +29,7 @@ const Auth = () => {
 
         if (decoded.role === "admin") {
           toast.success(data.message);
+          setIsLogin(true)
           setTimeout(() => navigate("/admin/dashboard"), 1500);
         } else {
           toast.error("Only admin access");

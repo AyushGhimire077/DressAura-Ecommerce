@@ -43,15 +43,18 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), 0px 2px 6px rgba(0, 0, 0, 0.05);
   padding: 20px;
 }
+
 .total-box {
   margin: 20px;
 }
+
 .total-box h4,
 p {
   font-size: 21px;
   text-align: left;
   margin: 10px;
 }
+
 .more-wrapper {
   display: flex;
   justify-content: space-evenly;
@@ -59,6 +62,7 @@ p {
   margin: 40px auto;
   align-items: center;
 }
+
 .more-wrapper .addPro input {
   height: 14px;
   width: 220px;
@@ -69,12 +73,14 @@ p {
   border-radius: 10px;
   text-align: start;
 }
+
 .addPro form {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px;
 }
+
 .more-wrapper .addPro {
   display: flex;
   flex-direction: column;
@@ -88,7 +94,9 @@ p {
   justify-content: center;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
+  margin-left: 120px;
 }
+
 .submit-btn {
   height: 36px;
   width: 150px;
@@ -97,29 +105,31 @@ p {
   cursor: pointer;
   transition: all 0.4s ease-in;
 }
-.submit-btn:hover{
+
+.submit-btn:hover {
   border-color: rgba(137, 43, 226, 0.677);
 }
 
-
-.more-info-box{
+.more-info-box {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   height: auto;
-background-color: whitesmoke; 
+  background-color: whitesmoke;
   width: 400px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 30px;
 }
-.select-cat{
+
+.select-cat {
   height: 34px;
   border-radius: 8px;
   width: 140px;
   outline: none;
 }
+
 .submit-btn.loading {
   background: linear-gradient(90deg, #007bff, #0056b3, #007bff);
   background-size: 200% 200%;
@@ -128,8 +138,13 @@ background-color: whitesmoke;
 }
 
 @keyframes loadingAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-
