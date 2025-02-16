@@ -1,15 +1,20 @@
-// orderRoute.js
+// Your router should look like this:
 import express from "express";
 import {
-  controllTotelSell,
+  getTotalSales,
+  getOrderInfo,
   orderController,
-  placeOder,
+  placeOrder,
 } from "../controller/orderController.js";
-
+import authMiddleware from "../middleware/authMiddelware.js";
 const orderRouter = express.Router();
 
-orderRouter.get("/total-sales", controllTotelSell);
-orderRouter.post('/create-order', placeOder)
-orderRouter.put("/update-status/:orderId", orderController);
+orderRouter.get("/total-sales", getTotalSales);
 
-export { orderRouter };
+orderRouter.get("/orders-info",authMiddleware, getOrderInfo);
+
+orderRouter.put("/orders/update-status/:orderId", orderController);
+
+orderRouter.post("/create-order/:orderId", placeOrder);
+
+export  {orderRouter};
