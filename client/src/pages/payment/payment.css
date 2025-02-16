@@ -1,0 +1,30 @@
+.payment-cancelled, .payment-success{
+    height: 100vh;
+    text-align: center;
+    padding: auto auto;
+    background-color: #0F0F0F;
+    color: #ccc;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-cancelled h1{
+    font-size: 2rem;
+    text-spacing-trim: 2px;
+    padding: 20px;
+}
+.payment-cancelled p{
+    font-size: 16px;
+    padding: 22px;
+}
+.payment-cancelled button{
+    padding: 10px 14px;
+    text-align: center;
+    border-radius: 16px;
+    outline: none;
+    border: none;
+}
+.payment-cancelled button:hover{
+    background-color: rgb(26, 119, 88);
+}

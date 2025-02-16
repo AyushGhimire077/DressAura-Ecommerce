@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthRoute } from "../../context/authContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./cart.css";
 
 const Cart = () => {
   const {
     removeFromCart,
     getTotal,
-    updateQuantity,
     clearCart,
     getCartCount,
     products,
@@ -17,33 +16,26 @@ const Cart = () => {
   } = useContext(AuthRoute);
 
   const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart);
-  }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart); // Load cart initially
   }, [fetchProducts]);
 
   const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) return;
 
     updateCartQuantity(productId, newQuantity);
-    setCart((prevCart) =>
-      prevCart.map((item) =>
+
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
         item._id === productId ? { ...item, quantity: newQuantity } : item
-      )
-    );
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(
-        cart.map((item) =>
-          item._id === productId ? { ...item, quantity: newQuantity } : item
-        )
-      )
-    );
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   const handleAddToCart = (product) => {
@@ -55,10 +47,36 @@ const Cart = () => {
     });
   };
 
+  const handleRemoveFromCart = (productId) => {
+    removeFromCart(productId);
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item._id !== productId);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const orderId = localStorage.getItem("orderId"); 
+
+  const handleNav = () => {
+    if (orderId) {
+      navigate(`/order-info`);
+    } else {
+      console.error("No orderId found in localStorage");
+    }
+  };
+
   return (
     <>
       <div className="cart-container">
         <h1>Your Cart</h1>
+        {cart.length > 0 ||
+          (cart.length === 0 && (
+            <button className="order-info-btn" onClick={handleNav}>
+              View Orders
+            </button>
+          ))}
+
         {cart.length > 0 ? (
           <div className="cart-items">
             {cart.map((item) => (
@@ -90,7 +108,7 @@ const Cart = () => {
                   </div>
                   <button
                     className="remove-btn"
-                    onClick={() => removeFromCart(item._id)}
+                    onClick={() => handleRemoveFromCart(item._id)}
                   >
                     Remove
                   </button>
@@ -103,6 +121,12 @@ const Cart = () => {
               <button className="clear-cart-btn" onClick={clearCart}>
                 Clear Cart
               </button>
+              {cart.length > 0  && (
+                  <button className="order-info-btn" onClick={handleNav}>
+                    View Orders
+                  </button>
+                )}
+
               <button className="checkout-btn">
                 <Link style={{ color: "white" }} to="/process-checkout">
                   Proceed to Checkout

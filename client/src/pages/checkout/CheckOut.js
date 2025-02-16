@@ -6,53 +6,73 @@ import "./checkout.css";
 import toast from "react-hot-toast";
 
 const CheckOut = () => {
-  const { backendURI, userData, cart, getTotal, clearCart } =
+  const { backendURI, userData, updateUserData, cart, getTotal, clearCart } =
     useContext(AuthRoute);
+
   const [loading, setLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
 
   const userId = userData?.id;
+  const navigate = useNavigate();
 
-  const navigate = useNavigate("");
-
-  // Function to validate form inputs
   const validateForm = () => {
     if (!phoneNumber || !address) {
       toast.error("Please enter both phone number and address.");
       return false;
     }
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      toast.error("Please enter a valid 10-digit phone number.");
+      return false;
+    }
+
     return true;
   };
 
   const handleCashCheckout = async () => {
     if (!validateForm()) return;
 
+    const orderId = Date.now().toString();
+
+    updateUserData({ orderId });
+    console.log("updated data is", updateUserData);
+
     const items = cart.map((item) => ({
       productId: item._id,
       quantity: item.quantity,
       price: item.price,
+      productName: item.name,
     }));
 
-    console.log(items);
+    console.log("Order Items:", items);
 
     try {
-      const { data } = await axios.post(`${backendURI}/api/create-order`, {
-        userId,
-        number: phoneNumber,
-        address,
-        totalPrice: getTotal(),
-        items,
-      });
+      const totalPrice = getTotal();
+
+      const { data } = await axios.post(
+        `${backendURI}/api/create-order/${orderId}`,
+        {
+          userId,
+          orderId,
+          number: phoneNumber,
+          address,
+          totalPrice,
+          items,
+        }
+      );
+
       if (data.success) {
-        toast.success(data.message);
-        navigate("/");
+        toast.success("Order placed successfully!");
         clearCart();
+        navigate(`/order-info`);
       } else {
-        toast.error(data.message || "Something worng");
+        toast.error(data.message || "Something went wrong");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Order creation failed:", error);
+      toast.error("Order creation failed!");
     }
   };
 
@@ -85,13 +105,13 @@ const CheckOut = () => {
         document.body.appendChild(form);
         form.submit(); // Submit form automatically
       } else {
-        alert("Payment processing failed!");
+        toast.error("Payment processing failed!");
       }
     } catch (error) {
-      console.error("Payment error:", error);
-      alert("Something went wrong!");
+      console.error("Payment error:", error.response?.data || error.message);
+      toast.error("Something went wrong during payment!");
     } finally {
-      setLoading(false); // Hide loading state
+      setLoading(false);
     }
   };
 
@@ -127,7 +147,11 @@ const CheckOut = () => {
           <h3>Choose Payment Method</h3>
 
           <div className="payment-option">
-            <h3 onClick={handleCashCheckout} className="payment-method">
+            <h3
+              onClick={handleCashCheckout}
+              className="payment-method"
+              style={{ cursor: "pointer" }}
+            >
               Cash On Delivery
             </h3>
           </div>

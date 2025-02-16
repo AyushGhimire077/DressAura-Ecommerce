@@ -12,12 +12,13 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState(null);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || []; // Load cart initially
+  });
 
   useEffect(() => {
     checkToken();
     fetchProducts();
-    loadCartFromStorage();
     const interval = setInterval(checkToken, 6000);
     return () => clearInterval(interval);
   }, []);
@@ -27,7 +28,6 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        
         if (decoded.exp * 1000 > Date.now()) {
           setIsLogin(true);
           setUserData(decoded);
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("token");
     setIsLogin(false);
     setUserData(null);
-    clearCart(); // Clear cart on logout
+    if (isLogin) clearCart(); // Only clear the cart if user was logged in
   };
 
   const fetchProducts = async () => {
@@ -58,18 +58,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loadCartFromStorage = () => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart);
-  };
-
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const updateCart = (updatedCart) => {
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const updateUserData = (newData) => {
+    setUserData((prevData) => ({
+      ...prevData,
+      ...newData,
+    }));
   };
 
   const addToCart = (product) => {
@@ -88,7 +89,7 @@ export const AuthProvider = ({ children }) => {
   const removeFromCart = (productId) =>
     updateCart(cart.filter((item) => item._id !== productId));
 
-  const updateCartQuantity=(productId, quantity)=> {
+  const updateCartQuantity = (productId, quantity) => {
     if (quantity < 1) return removeFromCart(productId);
     updateCart(
       cart.map((item) =>
@@ -108,6 +109,14 @@ export const AuthProvider = ({ children }) => {
   const getTotal = () =>
     cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const setOrderId = (orderId) => {
+    localStorage.setItem("orderId", orderId); // Store in localStorage
+  };
+
+  const getOrderId = () => {
+    return localStorage.getItem("orderId"); // Get from localStorage
+  };
+
   return (
     <AuthRoute.Provider
       value={{
@@ -125,6 +134,9 @@ export const AuthProvider = ({ children }) => {
         clearCart,
         getCartCount,
         getTotal,
+        updateUserData,
+        setOrderId, // Provide setOrderId function
+        getOrderId, // Provide getOrderId function
       }}
     >
       {children}

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./payment.css";
 
 const PaymentCancelled = () => {
   useEffect(() => {
@@ -7,6 +8,7 @@ const PaymentCancelled = () => {
 
   return (
     <div className="payment-cancelled">
+      <div class="cancell-text">
       <h1>Payment Cancelled</h1>
       <p>
         Your payment has been cancelled. You can try again or check your order.
@@ -14,6 +16,8 @@ const PaymentCancelled = () => {
       <button onClick={() => (window.location.href = "/cart")}>
         Go Back to Cart
       </button>
+
+      </div>
     </div>
   );
 };
