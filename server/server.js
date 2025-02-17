@@ -24,7 +24,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: process.env.FRONTENDURL,
     credentials: true,
   })
 );
