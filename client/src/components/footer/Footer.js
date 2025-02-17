@@ -33,7 +33,7 @@ const Footer = () => {
         <ul>
           <li>Connect Us</li>
           <li>Help</li>
-          <li onClick={scrollAbt}>Know More</li>
+          <li >Know More</li>
           <li>Customer Service</li>
         </ul>
       </div>

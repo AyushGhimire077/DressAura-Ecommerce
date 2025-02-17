@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./about.css";
+import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
   const aboutRef = useRef(null);
@@ -15,7 +18,7 @@ const About = () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
 
     if (aboutRef.current) {
@@ -29,46 +32,65 @@ const About = () => {
     };
   }, []);
 
+  const location = useLocation()
+
   return (
     <div className="about">
-      <hr/>
+      {location.pathname === "/" ? null : (
+        <Link to="/">
+          <FontAwesomeIcon
+            style={{ padding: "30px" }}
+            size="xl"
+            icon={faArrowLeft}
+          />
+        </Link>
+      )}
+
       <div className="about-container" ref={aboutRef}>
         <div className="about-head">
-          <h1>Why Choose Us?</h1>
+          <h1>About Us</h1>
         </div>
+
         <div className="abt-explain">
           <div className="explain-head">
-            <h1>Our Advantages</h1>
-            <ul>
-              <li>
-                <strong>Fast Delivery:</strong> We ensure quick delivery of your
-                orders.
-              </li>
-              <li>
-                <strong>24/7 Support:</strong> Our team is always here to assist
-                you.
-              </li>
-              <li>
-                <strong>Quality Products:</strong> We offer only the best,
-                reliable products.
-              </li>
-              <li>
-                <strong>Secure Payments:</strong> Your transactions are always
-                safe with us.
-              </li>
-            </ul>
-          </div>
-          <div className="about-details">
-            <h2>About Us</h2>
+            <h1>Our Mission</h1>
             <p>
-              We are dedicated to offering excellent products and services.<br/> Our
-              mission is to provide top-quality products and<br/> ensure complete
-              customer satisfaction.
+              We aim to provide top-quality products with exceptional customer
+              service. <br />
+              Your satisfaction is our highest priority.
             </p>
           </div>
         </div>
+
+        {/* Core Values */}
+        <div className="abt-explain">
+          <div className="explain-head">
+            <h1>Our Core Values</h1>
+            <ul>
+              <li>
+                <strong>Quality First:</strong> Only the best products for our
+                customers.
+              </li>
+              <li>
+                <strong>Customer Commitment:</strong> We value your trust and
+                loyalty.
+              </li>
+              <li>
+                <strong>Innovation:</strong> Continuously improving for a better
+                experience.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="abt-explain">
+          <div className="explain-head">
+            <h1>Join Us Today!</h1>
+            <p>Be a part of our growing community and experience excellence.</p>
+            <button className="cta-button">Shop Now</button>
+          </div>
+        </div>
       </div>
-      <hr/>
     </div>
   );
 };

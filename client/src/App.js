@@ -11,6 +11,8 @@ import PaymentSuccess from "./pages/payment/PaymentSucess";
 import PaymentCancelled from "./pages/payment/PayemntFail";
 import CheckOut from "./pages/checkout/CheckOut";
 import OrderInfo from "./components/orderStatus/OrderInfo";
+import Trending from "./pages/trending/Trending";
+import About from "./components/about/About";
 
 const App = () => {
 
@@ -27,7 +29,9 @@ const App = () => {
           <Route path="/process-checkout" element={<CheckOut />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-cancelled" element={<PaymentCancelled />} />
-          <Route path="/order-info" element={<OrderInfo />} />{" "}
+          <Route path="/order-info" element={<OrderInfo />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/aboutus" element={<About />} />
         </Routes>
       </Router>
       <Footer />

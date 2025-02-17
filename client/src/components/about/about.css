@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.about{
+.about {
   background-color: #0F0F0F;
   padding-bottom: 30px;
 }
-.about-container{
+
+.about-container {
   padding: 20px;
   opacity: 0;
   margin: auto 100px;
@@ -13,6 +14,7 @@
   text-align: center;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
 .about-container.visible {
   opacity: 1;
   transform: translateY(0);
@@ -25,17 +27,18 @@
 }
 
 .abt-explain {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #ccc;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
 }
-hr{
+
+hr {
   width: 80%;
-  margin: auto auto;
-  box-shadow: 1px 1px 5px rgba(rgb(139, 125, 125), rgb(192, 186, 186), white, 1);
+  margin: auto;
+  box-shadow: 1px 1px 5px rgba(139, 125, 125, 1);
 }
 
 .explain-head h1 {
@@ -51,7 +54,7 @@ hr{
 
 .explain-head ul li {
   font-size: 1.1rem;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .about-details h2 {
@@ -61,11 +64,44 @@ hr{
 }
 
 .about-details p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin:30px 80px;
-    margin-bottom: 50px;
-    text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 30px 80px;
+  text-align: center;
+}
+
+/* Team Section */
+.team {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+/* Call to Action */
+.cta-button {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 30px;
+}
+
+.cta-button:hover {
+  background-color: #ff4757;
 }
 
 @media (max-width: 768px) {
