@@ -41,6 +41,10 @@ app.use('/api', PaymentRouter);
 
 const port = process.env.PORT || 4000
 
+app.get('/' ,(req, res)=> {
+  res.send('YO bruh')
+})
+
 app.listen(port,()=>{
     console.log('Server is listening on port :',port);  
 })
