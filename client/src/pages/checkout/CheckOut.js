@@ -14,6 +14,8 @@ const CheckOut = () => {
   const [address, setAddress] = useState("");
 
   const userId = userData?.id;
+  console.log(userData);
+  
   const navigate = useNavigate();
 
   const validateForm = () => {

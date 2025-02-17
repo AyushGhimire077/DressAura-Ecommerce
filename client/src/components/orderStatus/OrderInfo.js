@@ -3,8 +3,6 @@ import axios from "axios";
 import { AuthRoute } from "../../context/authContext"; // Assuming your auth context is set up
 import "./orderInfo.css";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const OrderInfo = () => {
   const [orders, setOrders] = useState([]); // Initialize as an empty array
@@ -13,6 +11,7 @@ const OrderInfo = () => {
   const { backendURI } = useContext(AuthRoute);
   const navigate = useNavigate();
 
+  // Function to fetch all orders for the logged-in user
   const fetchOrders = async () => {
     try {
       const { data } = await axios.get(`${backendURI}/api/orders-info`, {
@@ -64,36 +63,27 @@ const OrderInfo = () => {
     return <div>No orders found for this user.</div>;
   }
 
-
   return (
-    <>
-      <FontAwesomeIcon 
-        onClick={()=>navigate('/')}
-        icon={faArrowLeft}
-        style={{ fontSize: "27px", padding: "20px 40px" }}
-      />
-
-      <div className="order-info-container">
-        <h1>Your Orders</h1>
-        {orders.map((order) => (
-          <div key={order._id} className="order-item">
-            <h2>Order ID: {order._id}</h2>
-            <p>Status: {order.status}</p>
-            <p>Total Amount: Rs. {order.totalPrice}</p>
-            <ul>
-              {order.items &&
-                order.items.map((item) => (
-                  <li key={item.productId}>
-                    {item.productName} - Quantity: {item.quantity} - Price: Rs.{" "}
-                    {item.price}
-                  </li>
-                ))}
-            </ul>
-            <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
-          </div>
-        ))}
-      </div>
-    </>
+    <div className="order-info-container">
+      <h1>Your Orders</h1>
+      {orders.map((order) => (
+        <div key={order._id} className="order-item">
+          <h2>Order ID: {order._id}</h2>
+          <p>Status: {order.status}</p>
+          <p>Total Amount: Rs. {order.totalPrice}</p>
+          <ul>
+            {order.items &&
+              order.items.map((item) => (
+                <li key={item.productId}>
+                  {item.productName} - Quantity: {item.quantity} - Price: Rs.{" "}
+                  {item.price}
+                </li>
+              ))}
+          </ul>
+          <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 
