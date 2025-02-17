@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthRoute } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./cart.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 
 const Cart = () => {
   const {
@@ -21,7 +24,7 @@ const Cart = () => {
   useEffect(() => {
     fetchProducts();
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart); // Load cart initially
+    setCart(storedCart);
   }, [fetchProducts]);
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -59,16 +62,19 @@ const Cart = () => {
   const orderId = localStorage.getItem("orderId"); 
 
   const handleNav = () => {
-    if (orderId) {
       navigate(`/order-info`);
-    } else {
-      console.error("No orderId found in localStorage");
-    }
+
   };
 
   return (
     <>
-      <div className="cart-container">
+      <FontAwesomeIcon 
+              onClick={()=>navigate('/')}
+              icon={faArrowLeft}
+              style={{ fontSize: "27px", padding: "20px 40px", position: "absolute" }}
+            />
+      <div
+        className="cart-container">
         <h1>Your Cart</h1>
         {cart.length > 0 ||
           (cart.length === 0 && (
@@ -121,7 +127,7 @@ const Cart = () => {
               <button className="clear-cart-btn" onClick={clearCart}>
                 Clear Cart
               </button>
-              {cart.length > 0  && (
+              {cart.length > 0 && (
                   <button className="order-info-btn" onClick={handleNav}>
                     View Orders
                   </button>

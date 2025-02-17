@@ -16,8 +16,10 @@ footer {
   flex: 1;
   max-width: 350px;
   text-align: left;
+  cursor: pointer;
   margin-bottom: 20px;
 }
+
 
 .abt-company h1 {
   font-size: 40px;

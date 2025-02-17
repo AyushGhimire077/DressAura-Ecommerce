@@ -12,11 +12,16 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 
+
 const Footer = () => {
+
+  const scrollTop = () => {
+    window.scrollTo({top:0, behavior: "smooth"})
+  }
   return (
     <footer>
       <div className="abt-company">
-        <h1>THE FISH BOWL</h1>
+        <h1 onClick={scrollTop}>THE FISH BOWL</h1>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br />
           Ea eaque veritatis saepe obcaecati ipsum esse <br />
@@ -28,7 +33,7 @@ const Footer = () => {
         <ul>
           <li>Connect Us</li>
           <li>Help</li>
-          <li >Know More</li>
+          <li onClick={scrollAbt}>Know More</li>
           <li>Customer Service</li>
         </ul>
       </div>
