@@ -87,7 +87,9 @@ const About = () => {
           <div className="explain-head">
             <h1>Join Us Today!</h1>
             <p>Be a part of our growing community and experience excellence.</p>
-            <button className="cta-button">Shop Now</button>
+            <Link to="/products">
+              <button className="cta-button">Shop Now</button>
+            </Link>
           </div>
         </div>
       </div>

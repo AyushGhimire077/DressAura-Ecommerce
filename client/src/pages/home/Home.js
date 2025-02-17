@@ -7,6 +7,7 @@ import { AuthRoute } from "../../context/authContext";
 import FeatureBox from "../../components/featureBox/featureBox";
 import About from "../../components/about/About";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = ({ aboutRef }) => {
   const [isBlurred, setIsBlurred] = useState(true);
@@ -67,7 +68,9 @@ const Home = ({ aboutRef }) => {
                 </p>
               </div>
               <div className={`latest-pro ${isBlurred ? "blurred" : ""}`}>
-                <span>See the latest products</span>
+                <Link to="/products">
+                  <span>See the latest products</span>
+                </Link>
               </div>
             </div>
             <div className="company-name">
