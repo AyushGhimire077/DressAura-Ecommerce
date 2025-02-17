@@ -54,7 +54,7 @@ const Orders = () => {
                             .join(", ")
                         : "No Products"}
                     </td>
-                    <td>${order.totalPrice}</td>
+                    <td>Rs.{order.totalPrice}</td>
                     <td>{order.status}</td>
                     <td>
                       <select

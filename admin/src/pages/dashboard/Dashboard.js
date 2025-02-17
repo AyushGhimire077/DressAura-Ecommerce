@@ -201,21 +201,6 @@ const Dashboard = () => {
             </button>
           </form>
         </div>
-
-        <div className="orders-container">
-          <h2>Pending Orders</h2>
-          {pendingOrders.length === 0 ? (
-            <p>No pending orders</p>
-          ) : (
-            <ul>
-              {pendingOrders.map((order) => (
-                <li key={order.id}>
-                  {order.productName} - {order.status}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [totalSales, setTotalSales] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [products, setProducts] = useState([]); // Track products
   const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null); // Track error state
 
@@ -36,28 +37,93 @@ export const AuthProvider = ({ children }) => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${backendURI}/api/orders-info`,{withCredentials: true}); // Use the order review API to get all orders
+      const response = await axios.get(`${backendURI}/api/orders-info`, {
+        withCredentials: true,
+      });
       if (response.data.success) {
         setOrders(response.data.orders);
       } else {
         setError(response.data.message); // Set error state if any issue
       }
     } catch (err) {
-      setError("Error fetching orders."); // Set error state if request fails
+      setError("Error fetching orders.");
     } finally {
       setLoading(false); // Turn off the loading state
+    }
+  };
+
+  // Fetch all products
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(`${backendURI}/api/admin/products`);
+      if (response.data.success) {
+        setProducts(response.data.products);
+      } else {
+        setError("Failed to fetch products");
+      }
+    } catch (error) {
+      setError("Error fetching products");
+    }
+  };
+
+  // Delete product
+  const deleteProduct = async (productId) => {
+    try {
+      const response = await axios.delete(
+        `${backendURI}/api/admin/delete-product/${productId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.data.success) {
+        // Remove product from the local state
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product._id !== productId)
+        );
+        toast.success("Product deleted successfully");
+      } else {
+        setError(response.data.message || "Failed to delete product");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Error deleting product");
+    }
+  };
+
+  // Update a product
+  const updateProduct = async (productId, updatedData) => {
+    try {
+      const response = await axios.put(
+        `${backendURI}/api/admin/update-product/${productId}`,
+        updatedData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.data.success) {
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product._id === productId ? { ...product, ...updatedData } : product
+          )
+        );
+      } else {
+        throw new Error(response.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Error updating product");
     }
   };
 
   const updateOrderStatus = async (orderId, status) => {
     try {
       const response = await axios.put(
-        `${backendURI}/api/orders/update-status/${orderId}`,
+        `${backendURI}/api//update-status/${orderId}`,
         { status },
         { withCredentials: true }
       );
       if (response.data.success) {
-        // Successfully updated order, refresh the orders list
         fetchOrders();
       } else {
         setError("Failed to update the order status");
@@ -68,9 +134,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post(
+        `${backendURI}/api/auth/login`,
+        { email, password },
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        Cookies.set("token", response.data.token); // Store the token in cookies
+        setIsLogin(true);
+        setUserData(response.data.user);
+        toast.success("Login successful");
+      } else {
+        toast.error(response.data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error", error);
+      toast.error("An error occurred during login");
+    }
+  };
 
   const checkToken = () => {
     const token = Cookies.get("token");
@@ -104,12 +187,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkToken();
     fetchTotalSales();
-    fetchOrders(); // Fetch orders when component mounts
-  }, []); // Run only on mount
-
-  useEffect(() => {
-    console.log("Orders:", orders);
-  }, [orders]); // This will log whenever orders update
+    fetchOrders();
+    fetchProducts(); // Fetch products when component mounts
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,12 +208,17 @@ export const AuthProvider = ({ children }) => {
         setUserData,
         userData,
         checkToken,
+        login,
         updateOrderStatus,
+        deleteProduct, // Expose deleteProduct function
         totalSales,
         orders,
-        fetchOrders, // Passing the fetchOrders function
-        loading, // Passing loading state
-        error, // Passing error state for handling in components
+        products, // Pass products state to provider
+        fetchOrders,
+        fetchProducts, // Pass fetchProducts function
+        loading,
+        error,
+        updateProduct,
       }}
     >
       {children}
