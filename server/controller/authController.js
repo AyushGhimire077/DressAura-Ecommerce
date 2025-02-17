@@ -66,8 +66,8 @@ const generateToken = jwt.sign(
 
     res.cookie("token", generateToken, {
       secure: process.env.ENV_STAGE === "production",
-      sameSite: process.env.ENV_STAGE === "production" ? "lax" : "none",
-      httpOnly: false,
+      sameSite: "None",
+      httpOnly: true,
       maxAge: 60 * 60 * 24 * 60 * 1000,
     });
 
@@ -113,8 +113,8 @@ const generateToken = jwt.sign(
 
     res.cookie("token", generateToken, {
       secure: process.env.ENV_STAGE === "production",
-      sameSite: process.env.ENV_STAGE === "production" ? "lax" : "none",
-      httpOnly: false,
+      sameSite: "None",
+      httpOnly: true,
       path: "/",
       maxAge: 60 * 60 * 24 * 60 * 1000,
     });
