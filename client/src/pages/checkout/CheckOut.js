@@ -60,7 +60,7 @@ const CheckOut = () => {
           address,
           totalPrice,
           items,
-        }
+        },{withCredentials: true}
       );
 
       if (data.success) {
