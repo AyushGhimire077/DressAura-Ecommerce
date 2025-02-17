@@ -16,7 +16,7 @@ const getTotalSales = async (req, res) => {
 };
 
 const getOrderInfo = async (req, res) => {
-  const userId = req.id; // Extracting userId from decoded JWT
+  const userId = req.id;
 
   try {
     // Make sure the query to fetch orders is correct
@@ -37,7 +37,6 @@ const getOrderInfo = async (req, res) => {
   }
 };
 
-// In Express backend (assuming your order model is connected to MongoDB)
 const orderController = async (req, res) => {
   const { status } = req.body;
   const { orderId } = req.params;
