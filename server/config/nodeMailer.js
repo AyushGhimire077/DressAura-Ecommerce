@@ -1,3 +1,6 @@
+//Downlaod nodemailer ( npm i nodemailer )
+//Import it 
+
 import nodemailer from 'nodemailer';
 import 'dotenv/config'
 

@@ -4,6 +4,10 @@ npm-debug.log
 yarn-error.log
 .env
 
+#admin
+client/node_modules/
+client/.env
+
 # React Client (build and other files)
 client/build/
 client/node_modules/
