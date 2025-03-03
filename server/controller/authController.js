@@ -33,7 +33,7 @@ const registerAuth = async (req, res) => {
 
     //welcome mail
     const mailOptions = {
-      from: process.env.SENDER_ID,
+      from: process.env.EMAIL_USER,
       to: newUser.email,
       subject: "Welcome to NTG",
       text: `Your account has been successfully created using email id: ${newUser.email}`,
@@ -220,7 +220,7 @@ const verifyOTT = async (req, res) => {
 
     //send ott to user email
     const mailOptions = {
-      from: process.env.SENDER_ID,
+      from: process.env.EMAIL_USER,
       to: user.email,
       subject: "NTG verify accout OTT",
       text: `Verify your NTG account using OTP code : ${otp}. Verifying your email helps us keep your account secure.`,
