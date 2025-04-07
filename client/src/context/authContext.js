@@ -7,8 +7,7 @@ import { toast } from "react-hot-toast";
 export const AuthRoute = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const backendURI =
-    process.env.REACT_APP_BACKEND_URI || "http://localhost:4000";
+  const backendURI = "https://dress-aura-backend.vercel.app";
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState(null);
   const [products, setProducts] = useState([]);
